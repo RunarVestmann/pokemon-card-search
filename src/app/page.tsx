@@ -2,9 +2,9 @@ import type { PokemonCardModel } from "@/types";
 import { PokemonCardList } from "@/components/PokemonCardList/PokemonCardList";
 import { Pagination } from "@/components/Pagination/Pagination";
 import { API_BASE_URL } from "@/constants";
+import { SearchSection } from "@/components/SearchSection/SearchSection";
 
 import styles from "./page.module.css";
-import { SearchSection } from "@/components/SearchSection/SearchSection";
 
 const PAGE_SIZE = 12;
 
@@ -23,9 +23,9 @@ interface PokemonCardListPageProps {
   }>;
 }
 
-export default async function PokemonCardListPage({
+const PokemonCardListPage = async ({
   searchParams,
-}: PokemonCardListPageProps) {
+}: PokemonCardListPageProps) => {
   const { page = "1", name = "" } = await searchParams;
   const currentPage = Number(page);
 
@@ -36,11 +36,20 @@ export default async function PokemonCardListPage({
 
   const totalPages = Math.ceil(json.totalCount / PAGE_SIZE);
 
+  const nameParam = name ? `&name=${name}` : "";
+
   return (
     <div className={styles.container}>
       <SearchSection />
       <PokemonCardList cards={json.data} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        previousLinkHref={`/?page=${currentPage - 1}${nameParam}`}
+        nextLinkHref={`/?page=${currentPage + 1}${nameParam}`}
+      />
     </div>
   );
-}
+};
+
+export default PokemonCardListPage;

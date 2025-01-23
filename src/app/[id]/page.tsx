@@ -18,9 +18,9 @@ interface PokemonCardDetailsPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function PokemonCardDetailsPage({
+const PokemonCardDetailsPage = async ({
   params,
-}: PokemonCardDetailsPageProps) {
+}: PokemonCardDetailsPageProps) => {
   const { id } = await params;
 
   const response = await fetch(`${API_BASE_URL}/${id}`);
@@ -98,4 +98,6 @@ export default async function PokemonCardDetailsPage({
       </div>
     </div>
   );
-}
+};
+
+export default PokemonCardDetailsPage;

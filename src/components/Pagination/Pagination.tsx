@@ -5,16 +5,23 @@ import styles from "./Pagination.module.css";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
+  previousLinkHref: string;
+  nextLinkHref: string;
 }
 
-export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
+export const Pagination = ({
+  currentPage,
+  totalPages,
+  previousLinkHref,
+  nextLinkHref,
+}: PaginationProps) => {
   return (
     <div className={styles.container}>
       <Link
         style={{
           visibility: currentPage > 1 ? "visible" : "hidden",
         }}
-        href={`/?page=${currentPage - 1}`}
+        href={previousLinkHref}
       >
         Previous
       </Link>
@@ -23,7 +30,7 @@ export const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
         style={{
           visibility: currentPage < totalPages ? "visible" : "hidden",
         }}
-        href={`/?page=${currentPage + 1}`}
+        href={nextLinkHref}
       >
         Next
       </Link>
