@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.container input {
+  padding: 4px;
+  height: 32px;
+  width: 180px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid black;
+}
+
+.container a {
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px;
+  height: 32px;
+}
